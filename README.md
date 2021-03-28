@@ -13,10 +13,11 @@ pip install micropython-lagan
 ## 功能
 - 支持日志在终端实时打印
 - 支持二进制流打印
+- 支持带颜色的日志打印
 
-与python标准版lagan相比，micropython版本的lagan删除了输出到日志文件，以及带颜色的日志打印等功能。
+与python标准版lagan相比，micropython版本的lagan删除了输出到日志文件的功能。
 
-error打印函数名改为err，原因使用error函数名在设备运行会报错。
+error打印函数名改为err，原因是使用error函数名在设备运行会报错。
 
 ## 示例
 ```python
@@ -57,3 +58,22 @@ lagan.print_hex('case2', lagan.LEVEL_ERROR, s)
 0050 : 50 51 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e 5f 
 0060 : 60 61 62 63 
 ````
+
+## 颜色控制
+可以使用EnableColor函数开控制打开或者关闭日志颜色，默认关闭颜色。
+````python
+lagan.set_filter_level(lagan.LEVEL_DEBUG)
+lagan.enable_color(True)
+lagan.println('case1', lagan.LEVEL_OFF, 'TestPrintOut1:%d', 100)
+lagan.println('case1', lagan.LEVEL_DEBUG, 'TestPrintOut1:%d', 100)
+lagan.println('case1', lagan.LEVEL_INFO, 'TestPrintOut1:%d', 100)
+lagan.println('case1', lagan.LEVEL_WARN, 'TestPrintOut1:%d', 100)
+lagan.println('case1', lagan.LEVEL_ERROR, 'TestPrintOut1:%d', 100)
+
+s = bytearray()
+for i in range(100):
+    s.append(i)
+lagan.print_hex('case2', lagan.LEVEL_INFO, s)
+````
+
+![图片](https://user-images.githubusercontent.com/1323843/112743667-e18a4380-8fcb-11eb-9a71-81aa2c635dbf.png)
