@@ -1,0 +1,9 @@
+.idea/
+.pytest_cache
+*.txt
+*.log
+build/
+*.egg-info/
+dist/
+lagan/__pycache__/
+/log
