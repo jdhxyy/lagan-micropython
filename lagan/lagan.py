@@ -21,7 +21,7 @@ _level_ch = {LEVEL_OFF: 'O', LEVEL_DEBUG: 'D', LEVEL_INFO: 'I', LEVEL_WARN: 'W',
 _level_color = {LEVEL_OFF: 30, LEVEL_DEBUG: 37, LEVEL_INFO: 36, LEVEL_WARN: 35, LEVEL_ERROR: 31}
 
 _is_pause = False
-_filter_level = LEVEL_INFO
+_filter_level = LEVEL_WARN
 _is_color = False
 
 
