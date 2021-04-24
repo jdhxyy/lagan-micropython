@@ -50,7 +50,19 @@ def println(tag: str, level: int, msg: str, *args):
     content = _level_ch[level] + '/' + tag + ': ' + (msg % args)
     if _is_color:
         content = '\033[7;' + '%d;' % _level_color[level] + '40m' + content + '\033[0m'
-    _print(level, content)
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
 
 
 def _print(level, msg):
@@ -92,7 +104,19 @@ def print_hex(tag: str, level: int, data: bytearray):
         content = '\033[7;' + '%d;' % _level_color[level] + '40m' + new_format + '\033[0m' + s
     else:
         content = new_format + s
-    _print(level, content)
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
 
 
 def pause():
@@ -114,19 +138,99 @@ def is_pause() -> bool:
 
 def debug(tag: str, msg: str, *args):
     """打印debug信息"""
-    println(tag, LEVEL_DEBUG, msg, *args)
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    level = LEVEL_DEBUG
+    if _is_pause or _filter_level == LEVEL_OFF or level < _filter_level:
+        return
+
+    content = _level_ch[level] + '/' + tag + ': ' + (msg % args)
+    if _is_color:
+        content = '\033[7;' + '%d;' % _level_color[level] + '40m' + content + '\033[0m'
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
 
 
 def info(tag: str, msg: str, *args):
     """打印info信息"""
-    println(tag, LEVEL_INFO, msg, *args)
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    level = LEVEL_INFO
+    if _is_pause or _filter_level == LEVEL_OFF or level < _filter_level:
+        return
+
+    content = _level_ch[level] + '/' + tag + ': ' + (msg % args)
+    if _is_color:
+        content = '\033[7;' + '%d;' % _level_color[level] + '40m' + content + '\033[0m'
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
 
 
 def warn(tag: str, msg: str, *args):
     """打印warn信息"""
-    println(tag, LEVEL_WARN, msg, *args)
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    level = LEVEL_WARN
+    if _is_pause or _filter_level == LEVEL_OFF or level < _filter_level:
+        return
+
+    content = _level_ch[level] + '/' + tag + ': ' + (msg % args)
+    if _is_color:
+        content = '\033[7;' + '%d;' % _level_color[level] + '40m' + content + '\033[0m'
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
 
 
 def err(tag: str, msg: str, *args):
     """打印error信息"""
-    println(tag, LEVEL_ERROR, msg, *args)
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    level = LEVEL_ERROR
+    if _is_pause or _filter_level == LEVEL_OFF or level < _filter_level:
+        return
+
+    content = _level_ch[level] + '/' + tag + ': ' + (msg % args)
+    if _is_color:
+        content = '\033[7;' + '%d;' % _level_color[level] + '40m' + content + '\033[0m'
+
+    # 不用子函数减少嵌套深度.micropython线程中嵌套深度有限制
+    t = utime.time()
+    hour = int(t / 3600)
+    t -= hour * 3600
+    minute = int(t / 60)
+    second = t - minute * 60
+    timestamp = '%02d:%02d:%02d - ' % (hour, minute, second)
+
+    if _is_color:
+        print('\033[7;' + '%d;' % _level_color[level] + '40m' + timestamp + '\033[0m' + content)
+    else:
+        print(timestamp + content)
